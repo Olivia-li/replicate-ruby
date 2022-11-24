@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "replicate/ruby"
+require "replicate"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
