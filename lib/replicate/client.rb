@@ -7,16 +7,24 @@ module Replicate
 
   # Client for the Replicate API
   class Client
-    attr_reader :token, :adaptor, :connection
+    attr_reader :token, :conn
 
-    def initialize(token:, adaptor: Faraday.default_adapter)
+    def initialize(token:, &block)
       @token = token
-      @adaptor = adaptor
-      @connection = Faraday.new(url: REPLICATE_API_BASE_URL) do |faraday|
-        faraday.request :json
-        faraday.response :json, content_type: /\bjson$/
-        faraday.adapter adaptor
-        faraday.headers = headers()
+      if block_given?
+        conn &block
+      else
+        conn
+      end
+
+    end
+
+    def conn(&block)
+      @conn ||= Faraday.new(url: REPLICATE_API_BASE_URL) do |f|
+        yield f if block_given?
+        f.request :json
+        f.response :json, content_type: /\bjson$/
+        f.headers = headers()
       end
     end
 
@@ -31,13 +39,6 @@ module Replicate
       }
     end
 
-    def api_token
-      unless @token
-        raise ReplicateError("No API token provided. You need to set the REPLICATE_API_TOKEN environment variable or create a client with 'replicate.Client(api_token=...)'. You can find your API key on https://replicate.com")
-      end
-      return @token
-    end
-
     def requests(method:, path:, **kwargs)
       if ["GET", "OPTIONS"].include? method
         kwargs = kwargs.merge({allow_redirects: true})
@@ -45,7 +46,7 @@ module Replicate
       if ["HEAD"].include? method
         kwargs = kwargs.merge({allow_redirects: false})
       end
-      response = @connection.send(method.downcase, path, kwargs)
+      response = @conn.send(method.downcase, path, kwargs)
       if 400 <= response.status && response.status < 600
         raise ("HTTP error: #{response.status}, #{response.reason_phrase}")
       end
