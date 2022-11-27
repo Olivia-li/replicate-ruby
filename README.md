@@ -24,7 +24,7 @@ Or install it yourself as:
 
 You can run a model and get its output:
 
-```
+```ruby
 replicate = Replicate::Client.new(api_key: "#{YOUR API KEY HERE}")
 model = replicate.models("stability-ai/stable-diffusion")
 model.predict(prompt="a 19th century portrait of a wombat gentleman")
