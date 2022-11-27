@@ -1,6 +1,4 @@
 require 'faraday'
-require 'pry'
-
 
 module Replicate
   REPLICATE_API_BASE_URL = "https://api.replicate.com/v1"
