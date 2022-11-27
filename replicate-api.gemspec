@@ -3,7 +3,7 @@
 require_relative "lib/replicate/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "replicateruby"
+  spec.name = "replicate-api"
   spec.version = Replicate::VERSION
   spec.authors = ["Olivia Li"]
   spec.email = ["oliviali.ouyang@gmail.com"]
