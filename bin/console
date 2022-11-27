@@ -11,5 +11,6 @@ require "replicate"
 # require "pry"
 # Pry.start
 
+client = Replicate::Client.new(token: "")
 require "irb"
 IRB.start(__FILE__)
