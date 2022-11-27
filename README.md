@@ -9,7 +9,7 @@ Grab your token from replicate.com/account to use this library.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'replicate-ruby'
+gem 'replicateruby'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install replicate-ruby
+    $ gem install replicateruby
 
 ## Usage
 

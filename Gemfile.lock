@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    replicate-ruby (0.1.0)
+    replicateruby (0.1.0)
       faraday (~> 2.7.1)
 
 GEM
@@ -39,7 +39,7 @@ PLATFORMS
 DEPENDENCIES
   pry (~> 0.13.1)
   rake (~> 13.0)
-  replicate-ruby!
+  replicateruby!
   rspec (~> 3.0)
 
 BUNDLED WITH
