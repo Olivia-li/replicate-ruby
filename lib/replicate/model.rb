@@ -9,7 +9,7 @@ module Replicate
       @version_id = response.body["latest_version"]["id"]
     end
 
-    def predict(prompt:, height = 512, width = 512)
+    def predict(prompt, height=512, width=512)
       body = {version: @version_id, input: {prompt: prompt, height: height, width: width}}
       response = @client.requests(method: "POST", path: "predictions", **body)
       poll(prediction_id: response.body["id"])
