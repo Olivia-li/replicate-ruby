@@ -27,7 +27,9 @@ You can run a model and get its output:
 ```ruby
 replicate = Replicate::Client.new(token: "#{YOUR API KEY HERE}")
 model = replicate.models("stability-ai/stable-diffusion")
-model.predict(prompt="a 19th century portrait of a wombat gentleman")
+height = 786 
+width = 574
+model.predict(prompt: "a 19th century portrait of a wombat gentleman", width: width, height: height)
 ```
 
 ## Contributing
