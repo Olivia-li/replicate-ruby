@@ -10,7 +10,7 @@ module Replicate
     end
 
     def predict(prompt: "", height: 512, width: 512, image: "")
-      body = {version: @version_id, input: {prompt: prompt, height: height, width: width}}
+      body = {version: @version_id, input: {prompt: prompt, height: height, width: width, image: image}}
       response = @client.requests(method: "POST", path: "predictions", **body)
       poll(prediction_id: response.body["id"])
     end
@@ -22,7 +22,7 @@ module Replicate
         sleep(2)
         poll(prediction_id: prediction_id)
       elsif response.body["status"] == "succeeded" 
-        return response.body["output"][0]
+        return response.body["output"]
       else
         raise response.body["error"]
       end
